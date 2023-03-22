@@ -39,9 +39,21 @@ export function canMakeWord(word: string, remainingLetters: string): boolean {
 
 
 export const scrambleWords = (words: string[]): string => {
-  const combined = words.join('');
-  return _.shuffle(combined).join('');
+  let scrambled = "";
+  let chunk = "";
+  for (let i = words.length - 1; i >= 0; i--) {
+    chunk += words[i]
+
+    if (chunk.length == 8) {
+      chunk = _.shuffle(chunk).join('');
+      scrambled = chunk.slice(4, 8) + scrambled;
+      chunk = chunk.slice(0, 4);
+    }
+  }
+
+  return chunk + scrambled;
 };
+
 
 export const subtractWords = (pool: string, word: string): string => {
   const poolArray = pool.split('');
