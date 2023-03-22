@@ -19,6 +19,12 @@ function App() {
     setInputWord('');
   };
 
+  const handleTileClick = (letter: string) => {
+    if (inputWord.length < 4) {
+      setInputWord(inputWord + letter);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -57,7 +63,7 @@ function App() {
       <h1>Wombo Game</h1>
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
-          <span key={index} className="remaining-letters-tile">{letter}</span>
+          <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(letter)}>{letter}</span>
         ))}
       </h2>
       <form onSubmit={handleSubmit}>
