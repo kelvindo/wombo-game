@@ -24,10 +24,11 @@ function App() {
     setInputWord('');
   };
 
-  const handleTileClick = (letter: string) => {
+  const handleTileClick = (index: number) => {
+    const letter = remainingLetters[index];
     if (inputWord.length < 4) {
       setInputWord(inputWord + letter);
-      const tile = document.querySelector(`.remaining-letters-tile:nth-child(${remainingLetters.indexOf(letter) + 1})`);
+      const tile = document.querySelector(`.remaining-letters-tile:nth-child(${index + 1})`);
       tile?.classList.add('highlighted');
       setTimeout(() => {
         tile?.classList.remove('highlighted');
@@ -73,7 +74,7 @@ function App() {
       <h1>Wombo {date}</h1>
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
-          <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(letter)}>{letter}</span>
+          <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(index)}>{letter}</span>
         ))}
       </h2>
       <form onSubmit={handleSubmit}>
