@@ -1,6 +1,7 @@
 // src/utils/wordUtils.ts
 import _ from 'lodash';
 import dictionaries from '../data/dictionaries.json';
+import RandomSeed from 'random-seed';
 
 const fourLetterWords = dictionaries.fourLetterWords;
 const fiveLetterWords = dictionaries.fiveLetterWords;
@@ -67,5 +68,34 @@ export const subtractWords = (pool: string, word: string): string => {
 };
 
 export const getTodaysRandomWords = (): string[] => {
-   return _.sampleSize(fourLetterWords, 5);  
+  const date = new Date();
+  const seed = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const rng = RandomSeed.create(seed);
+  const shuffled = [...fourLetterWords];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(rng.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, 5);
+};
+
+export const getRandomWordsAndScramble = (): string => {
+  const date = new Date();
+  const seed = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const rng = RandomSeed.create(seed);
+  const shuffledWords = [...fourLetterWords].sort(() => rng.random() - 0.5);
+  const selectedWords = shuffledWords.slice(0, 5);
+  let scrambled = "";
+  let chunk = "";
+  for (let i = selectedWords.length - 1; i >= 0; i--) {
+    chunk += selectedWords[i];
+
+    if (chunk.length === 8) {
+      chunk = chunk.split('').sort(() => rng.random() - 0.5).join('');
+      scrambled = chunk.slice(4, 8) + scrambled;
+      chunk = chunk.slice(0, 4);
+    }
+  }
+
+  return chunk + scrambled;
 };
