@@ -1,12 +1,12 @@
 // src/App.tsx
 import { useState } from 'react';
-import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords, getRandomWordsAndScramble } from './utils/wordUtils';
+import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords } from './utils/wordUtils';
 import './App.css';
 
-// const words = getTodaysRandomWords();
-// const scrambled = scrambleWords(words);
+const words = getTodaysRandomWords();
+const scrambled = scrambleWords(words);
 
-const scrambled = getRandomWordsAndScramble();
+// const scrambled = getRandomWordsAndScramble();
 
 function App() {
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
@@ -83,8 +83,7 @@ function App() {
         </div>
       </form>
       {guessedWords.length === 5 && <h3>You Win!</h3>}
-      <p>{scrambled}</p>
-      <h3>Guessed Words:</h3>
+      <h3>Guessed Words</h3>
       <ul>
         {guessedWords.map((word, index) => (
           <li key={index}>{word}</li>
