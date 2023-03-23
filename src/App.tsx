@@ -1,9 +1,9 @@
 // src/App.tsx
 import { useState } from 'react';
-import { canMakeWord, isEnglishWord, scrambleWords, subtractWords } from './utils/wordUtils';
+import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords } from './utils/wordUtils';
 import './App.css';
 
-const words = ['tree', 'boat', 'frog', 'lion', 'duck'];
+const words = getTodaysRandomWords();
 const scrambled = scrambleWords(words);
 
 function App() {

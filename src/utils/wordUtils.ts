@@ -65,3 +65,7 @@ export const subtractWords = (pool: string, word: string): string => {
   }
   return poolArray.join('');
 };
+
+export const getTodaysRandomWords = (): string[] => {
+   return _.sampleSize(fourLetterWords, 5);  
+};

@@ -52,9 +52,9 @@ h2 span {
 .remaining-letters-tile {
   display: inline-block;
   font-size: 36px;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
   margin: 5px;
   border-radius: 10px;
