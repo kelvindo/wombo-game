@@ -7,10 +7,15 @@ const words = getTodaysRandomWords();
 const scrambled = scrambleWords(words);
 
 function App() {
+  const date = new Date().toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' });
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
   const [remainingLettersRest, setRemainingLettersRest] = useState(scrambled.slice(8));
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState('');
+
+  const handleClearInput = () => {
+    setInputWord('');
+  };
 
   const handleRestart = () => {
     setRemainingLetters(scrambled.slice(0, 8));
@@ -22,6 +27,11 @@ function App() {
   const handleTileClick = (letter: string) => {
     if (inputWord.length < 4) {
       setInputWord(inputWord + letter);
+      const tile = document.querySelector(`.remaining-letters-tile:nth-child(${remainingLetters.indexOf(letter) + 1})`);
+      tile?.classList.add('highlighted');
+      setTimeout(() => {
+        tile?.classList.remove('highlighted');
+      }, 250);
     }
   };
 
@@ -60,7 +70,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Wombo Game</h1>
+      <h1>Wombo {date}</h1>
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
           <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(letter)}>{letter}</span>
@@ -76,6 +86,7 @@ function App() {
           />
           <div className="button-container">
             <button type="submit">Guess</button>
+            <button type="button" onClick={handleClearInput}>Clear</button>
             <button type="button" onClick={handleRestart}>Restart</button>
           </div>
         </div>
