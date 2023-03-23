@@ -6,8 +6,6 @@ import './App.css';
 const words = getTodaysRandomWords();
 const scrambled = scrambleWords(words);
 
-// const scrambled = getRandomWordsAndScramble();
-
 function App() {
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
   const [remainingLettersRest, setRemainingLettersRest] = useState(scrambled.slice(8));
