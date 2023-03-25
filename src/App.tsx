@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords } from './utils/wordUtils';
 import './App.css';
 
-const words = getTodaysRandomWords();
-const scrambled = scrambleWords(words);
+// const words = getTodaysRandomWords();
+// const scrambled = scrambleWords(words);
+const scrambled = 'poeicedadfchnmacuusf';
 
 function App() {
   const date = new Date().toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' });
