@@ -74,7 +74,9 @@ function App() {
       <h1>Wombo {date}</h1>
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
-          <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(index)}>{letter}</span>
+          <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(index)}>
+            {letter.toUpperCase()}
+          </span>
         ))}
       </h2>
       <form onSubmit={handleSubmit}>
