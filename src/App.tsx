@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useState } from 'react';
-import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysJumbly, checkSolution } from './utils/wordUtils';
+import { canMakeWord, isEnglishWord, subtractWords, getTodaysJumbly, checkSolution } from './utils/wordUtils';
 import './App.css';
 
 const InformationPopup = () => {
