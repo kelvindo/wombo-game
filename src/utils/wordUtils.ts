@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import dictionaries from '../data/dictionaries.json';
 import dailys from '../data/daily_jumbly.json';
-import RandomSeed from 'random-seed';
 
 const fourLetterWords = dictionaries.fourLetterWords;
 const fiveLetterWords = dictionaries.fiveLetterWords;
@@ -38,27 +37,6 @@ export function canMakeWord(word: string, remainingLetters: string): boolean {
   }
   return true;
 }
-
-
-export const scrambleWords = (words: string[]): string => {
-  const date = new Date();
-  const seed = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  const rng = RandomSeed.create(seed);
-
-  let scrambled = "";
-  let chunk = "";
-  for (let i = words.length - 1; i >= 0; i--) {
-    chunk += words[i];
-
-    if (chunk.length === 8) {
-      chunk = chunk.split('').sort(() => rng.random() - 0.5).join('');
-      scrambled = chunk.slice(4, 8) + scrambled;
-      chunk = chunk.slice(0, 4);
-    }
-  }
-
-  return chunk + scrambled;
-};
 
 
 export const subtractWords = (pool: string, word: string): string => {
