@@ -22,8 +22,7 @@ const InformationPopup = () => {
               <li>Guessed letters will be replaced with new ones</li>
               <li>If you reach a dead end, you have to restart</li>
               <li>If you're stuck, check your solutions to see which guesses are correct</li>
-              <li>After 5 correct guesses, you win!</li>
-              <li>There is more than one correct solution!</li>
+              <li>Use all 20 letters to make 5 words and you win!</li>
             </ul>
             <button onClick={togglePopup}>Close</button>
           </div>
@@ -120,8 +119,7 @@ function App() {
   return (
     <div className="App">
       <h1>Wombo {date}</h1>
-      <button className="information-button" onClick={toggleInformationPopup}>?</button>
-      {showInformationPopup && <InformationPopup />}
+      <InformationPopup />
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
           <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(index)}>
