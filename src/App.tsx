@@ -3,16 +3,51 @@ import { useState } from 'react';
 import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords, checkSolution } from './utils/wordUtils';
 import './App.css';
 
+const InformationPopup = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  return (
+    <>
+      <button className="information-button" onClick={togglePopup}>?</button>
+      {showPopup && (
+        <div className="information-overlay">
+          <div className="information-popup">
+            <p>Instructions:</p>
+            <ul>
+              <li>Click the letters to create 4 letter words</li>
+              <li>Guessed letters will be replaced with new ones</li>
+              <li>If you reach a dead end, you have to restart</li>
+              <li>If you're stuck, check your solutions to see which guesses are correct</li>
+              <li>After 5 correct guesses, you win!</li>
+              <li>There is more than one correct solution!</li>
+            </ul>
+            <button onClick={togglePopup}>Close</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 // const words = getTodaysRandomWords();
 // const scrambled = scrambleWords(words);
 const scrambled = 'poeicedadfchnmacuusf';
 
 function App() {
   const date = new Date().toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' });
+  const [showInformationPopup, setShowInformationPopup] = useState(false);
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
   const [remainingLettersRest, setRemainingLettersRest] = useState(scrambled.slice(8));
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState('');
+
+  const toggleInformationPopup = () => {
+    setShowInformationPopup(!showInformationPopup);
+  };
 
   const handleClearInput = () => {
     setInputWord('');
@@ -38,7 +73,8 @@ function App() {
   };
 
   const handleCheck = () => {
-    const solutionChecks = checkSolution(scrambled, guessedWords);  
+    const solutionChecks = checkSolution(scrambled, guessedWords);
+  
     const guessedWordItems = document.querySelectorAll('.guessed-word-item');
   
     for (let i = 0; i < guessedWordItems.length; i++) {
@@ -84,6 +120,8 @@ function App() {
   return (
     <div className="App">
       <h1>Wombo {date}</h1>
+      <button className="information-button" onClick={toggleInformationPopup}>?</button>
+      {showInformationPopup && <InformationPopup />}
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
           <span key={index} className="remaining-letters-tile" onClick={() => handleTileClick(index)}>
