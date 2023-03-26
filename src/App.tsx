@@ -18,10 +18,10 @@ const InformationPopup = () => {
           <div className="information-popup">
             <p>Instructions:</p>
             <ul>
-              <li>Click the letters to create 4 letter words</li>
+              <li>Click the letters to guess 4 letter words</li>
               <li>Guessed letters will be replaced with new ones</li>
-              <li>If you reach a dead end, you have to restart</li>
-              <li>If you're stuck, check your solutions to see which guesses are correct</li>
+              <li>Use the "back" button to remove letters or words</li>
+              <li>Use the "hint" button to check which words are correct</li>
               <li>Use all 20 letters to make 5 words and you win!</li>
             </ul>
             <button onClick={togglePopup}>Close</button>
@@ -49,24 +49,21 @@ function App() {
     setShowInformationPopup(!showInformationPopup);
   };
 
-  const handleClearInput = () => {
-    setInputWord('');
-  };
-
   const handleBackspace = () => {
-    // setRemainingLetters(scrambled.slice(0, 8));
-    // setRemainingLettersRest(scrambled.slice(8));
-    // setGuessedWords([]);
-    // setInputWord('');
+    // If the input has letters, remove a letter.
+    if (inputWord.length > 0) {
+      setInputWord(inputWord.slice(0, -1))
 
-
-    const prevItem = stack.pop();
-    if (prevItem) {
-      setStack(stack);
-      setRemainingLetters(prevItem[0]);
-      setRemainingLettersRest(prevItem[1]);
-      guessedWords.pop()
-      setGuessedWords(guessedWords);
+    // If the input is empty, then remove the last guessed word.
+    } else {
+      const prevItem = stack.pop();
+      if (prevItem) {
+        setStack(stack);
+        setRemainingLetters(prevItem[0]);
+        setRemainingLettersRest(prevItem[1]);
+        guessedWords.pop()
+        setGuessedWords(guessedWords);
+      }
     }
   };
 
@@ -82,7 +79,7 @@ function App() {
     }
   };
 
-  const handleCheck = () => {
+  const handleHint = () => {
     const solutionChecks = checkSolution(scrambled, guessedWords);
   
     const guessedWordItems = document.querySelectorAll('.guessed-word-item');
@@ -149,14 +146,12 @@ function App() {
           />
           <div className="button-container">
             <button type="submit">Guess</button>
-            <button type="button" onClick={handleClearInput}>Clear</button>
             <button type="button" onClick={handleBackspace}>Back</button>
-            <button type="button" onClick={handleCheck}>Check</button>
+            <button type="button" onClick={handleHint}>Hint</button>
           </div>
         </div>
       </form>
       {guessedWords.length === 5 && <h3>You Win!</h3>}
-      <h3>Guessed Words</h3>
       <ul>
         {guessedWords.map((word, index) => (
           <li key={index} className="guessed-word-item">
