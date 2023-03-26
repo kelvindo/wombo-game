@@ -41,6 +41,7 @@ function App() {
   const [showInformationPopup, setShowInformationPopup] = useState(false);
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
   const [remainingLettersRest, setRemainingLettersRest] = useState(scrambled.slice(8));
+  const [stack, setStack] = useState<[string, string][]>([]);
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState('');
 
@@ -52,11 +53,21 @@ function App() {
     setInputWord('');
   };
 
-  const handleRestart = () => {
-    setRemainingLetters(scrambled.slice(0, 8));
-    setRemainingLettersRest(scrambled.slice(8));
-    setGuessedWords([]);
-    setInputWord('');
+  const handleBackspace = () => {
+    // setRemainingLetters(scrambled.slice(0, 8));
+    // setRemainingLettersRest(scrambled.slice(8));
+    // setGuessedWords([]);
+    // setInputWord('');
+
+
+    const prevItem = stack.pop();
+    if (prevItem) {
+      setStack(stack);
+      setRemainingLetters(prevItem[0]);
+      setRemainingLettersRest(prevItem[1]);
+      guessedWords.pop()
+      setGuessedWords(guessedWords);
+    }
   };
 
   const handleTileClick = (index: number) => {
@@ -107,6 +118,7 @@ function App() {
         }
         
         setTimeout(() => {
+          setStack([...stack, [remainingLetters, remainingLettersRest]])
           setRemainingLetters(newRemainingLetters + remainingLettersRest.slice(0, 4));
           setRemainingLettersRest(remainingLettersRest.slice(4))
           setGuessedWords([...guessedWords, inputWord]);
@@ -138,7 +150,7 @@ function App() {
           <div className="button-container">
             <button type="submit">Guess</button>
             <button type="button" onClick={handleClearInput}>Clear</button>
-            <button type="button" onClick={handleRestart}>Restart</button>
+            <button type="button" onClick={handleBackspace}>Back</button>
             <button type="button" onClick={handleCheck}>Check</button>
           </div>
         </div>
