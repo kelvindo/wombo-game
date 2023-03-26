@@ -137,3 +137,20 @@ li {
     background-color: inherit;
   }
 }
+
+.guessed-word-item {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.guessed-word-item--correct {
+  color: green; /* light green */
+}
+
+.guessed-word-item--incorrect {
+  color: red; /* light red */
+}

@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useState } from 'react';
-import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords } from './utils/wordUtils';
+import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords, checkSolution } from './utils/wordUtils';
 import './App.css';
 
 // const words = getTodaysRandomWords();
@@ -34,6 +34,17 @@ function App() {
       setTimeout(() => {
         tile?.classList.remove('highlighted');
       }, 250);
+    }
+  };
+
+  const handleCheck = () => {
+    const solutionChecks = checkSolution(scrambled, guessedWords);  
+    const guessedWordItems = document.querySelectorAll('.guessed-word-item');
+  
+    for (let i = 0; i < guessedWordItems.length; i++) {
+      const [word, isValid] = solutionChecks[i];
+      guessedWordItems[i].classList.toggle('guessed-word-item--correct', isValid);
+      guessedWordItems[i].classList.toggle('guessed-word-item--incorrect', !isValid);
     }
   };
 
@@ -92,6 +103,7 @@ function App() {
             <button type="submit">Guess</button>
             <button type="button" onClick={handleClearInput}>Clear</button>
             <button type="button" onClick={handleRestart}>Restart</button>
+            <button type="button" onClick={handleCheck}>Check</button>
           </div>
         </div>
       </form>
@@ -99,7 +111,9 @@ function App() {
       <h3>Guessed Words</h3>
       <ul>
         {guessedWords.map((word, index) => (
-          <li key={index}>{word}</li>
+          <li key={index} className="guessed-word-item">
+            {word}
+          </li>
         ))}
       </ul>
     </div>
