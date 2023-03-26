@@ -58,34 +58,35 @@ function App() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Check that the word has 4 letters, is English, and can be made from the tiles.
     if (
       inputWord.length === 4 &&
       isEnglishWord(inputWord) &&
-      canMakeWord(inputWord, remainingLetters) &&
-      !guessedWords.includes(inputWord)
+      canMakeWord(inputWord, remainingLetters)
     ) {
+      // Remove the guessed word from the letters.
       const newRemainingLetters = subtractWords(remainingLetters, inputWord);
-      if (newRemainingLetters !== remainingLetters) {
-        // Highlight the tiles of the guessed word
-        const guessedWordTiles = document.querySelectorAll('.remaining-letters-tile');
-        for (let i = 0; i < remainingLetters.length; i++) {
-          const letter = remainingLetters[i];
-          if (inputWord.includes(letter)) {
-            guessedWordTiles[i].classList.add('highlighted');
-          }
-          setTimeout(() => {
-            guessedWordTiles[i].classList.remove('highlighted');
-          }, 500);
+      
+      // Highlight the tiles of the guessed word.
+      const guessedWordTiles = document.querySelectorAll('.remaining-letters-tile');
+      for (let i = 0; i < remainingLetters.length; i++) {
+        const letter = remainingLetters[i];
+        if (inputWord.includes(letter)) {
+          guessedWordTiles[i].classList.add('highlighted');
         }
-        
         setTimeout(() => {
-          setStack([...stack, [remainingLetters, remainingLettersRest]])
-          setRemainingLetters(newRemainingLetters + remainingLettersRest.slice(0, 4));
-          setRemainingLettersRest(remainingLettersRest.slice(4))
-          setGuessedWords([...guessedWords, inputWord]);
-          setInputWord('');
+          guessedWordTiles[i].classList.remove('highlighted');
         }, 500);
       }
+      
+      // Update the state of the letters after the highlight is done.
+      setTimeout(() => {
+        setStack([...stack, [remainingLetters, remainingLettersRest]])
+        setRemainingLetters(newRemainingLetters + remainingLettersRest.slice(0, 4));
+        setRemainingLettersRest(remainingLettersRest.slice(4))
+        setGuessedWords([...guessedWords, inputWord]);
+        setInputWord('');
+      }, 500);
     }
   };
 
