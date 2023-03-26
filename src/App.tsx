@@ -118,7 +118,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Wombo {date}</h1>
+      <h1>Jumbly {date}</h1>
       <InformationPopup />
       <h2 className="remaining-letters">
         {remainingLetters.split('').map((letter, index) => (
