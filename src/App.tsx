@@ -3,51 +3,15 @@ import { useState } from 'react';
 import { canMakeWord, isEnglishWord, subtractWords, getTodaysJumbly, checkSolution } from './utils/wordUtils';
 import './App.css';
 
-const InformationPopup = () => {
-  const [showPopup, setShowPopup] = useState(false);
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  return (
-    <>
-      <button className="information-button" onClick={togglePopup}>?</button>
-      {showPopup && (
-        <div className="information-overlay">
-          <div className="information-popup">
-            <p>Instructions:</p>
-            <ul>
-              <li>Click the letters to guess 4 letter words</li>
-              <li>Guessed letters will be replaced with new ones</li>
-              <li>Use the "back" button to remove letters or words</li>
-              <li>Use the "hint" button to check which words are correct</li>
-              <li>Use all 20 letters to make 5 words and you win!</li>
-            </ul>
-            <button onClick={togglePopup}>Close</button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
-
-// const words = getTodaysRandomWords();
 const scrambled = getTodaysJumbly();
-// const scrambled = 'poeicedadfchnmacuusf';
 
 function App() {
   const date = new Date().toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' });
-  const [showInformationPopup, setShowInformationPopup] = useState(false);
   const [remainingLetters, setRemainingLetters] = useState(scrambled.slice(0, 8));
   const [remainingLettersRest, setRemainingLettersRest] = useState(scrambled.slice(8));
   const [stack, setStack] = useState<[string, string][]>([]);
   const [guessedWords, setGuessedWords] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState('');
-
-  const toggleInformationPopup = () => {
-    setShowInformationPopup(!showInformationPopup);
-  };
 
   const handleBackspace = () => {
     // If the input has letters, remove a letter.
@@ -162,5 +126,34 @@ function App() {
     </div>
   );
 }
+
+const InformationPopup = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  return (
+    <>
+      <button className="information-button" onClick={togglePopup}>?</button>
+      {showPopup && (
+        <div className="information-overlay">
+          <div className="information-popup">
+            <p>Instructions:</p>
+            <ul>
+              <li>Click the letters to guess 4 letter words</li>
+              <li>Guessed letters will be replaced with new ones</li>
+              <li>Use the "back" button to remove letters or words</li>
+              <li>Use the "hint" button to check which words are correct</li>
+              <li>Use all 20 letters to make 5 words and you win!</li>
+            </ul>
+            <button onClick={togglePopup}>Close</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default App;
