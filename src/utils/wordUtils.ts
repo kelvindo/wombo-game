@@ -1,6 +1,7 @@
 // src/utils/wordUtils.ts
 import _ from 'lodash';
 import dictionaries from '../data/dictionaries.json';
+import dailys from '../data/daily_jumbly.json';
 import RandomSeed from 'random-seed';
 
 const fourLetterWords = dictionaries.fourLetterWords;
@@ -72,12 +73,13 @@ export const subtractWords = (pool: string, word: string): string => {
 };
 
 
-export const getTodaysRandomWords = (): string[] => {
-  const date = new Date();
-  const seed = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  const rng = RandomSeed.create(seed);
-  const shuffledWords = [...fourLetterWords].sort(() => rng.random() - 0.5);
-  return shuffledWords.slice(0, 5);
+export const getTodaysJumbly = (): string => {
+  const startDate = new Date('2023-01-01');
+  const today = new Date();
+  const dayInMilliseconds = 1000 * 60 * 60 * 24;
+  const daysSinceStart = Math.floor((today.getTime() - startDate.getTime()) / dayInMilliseconds);
+  const index = daysSinceStart % Object.keys(dailys).length;
+  return dailys[index];
 };
 
 class TrieNode {

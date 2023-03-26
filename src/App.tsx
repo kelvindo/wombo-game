@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useState } from 'react';
-import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysRandomWords, checkSolution } from './utils/wordUtils';
+import { canMakeWord, isEnglishWord, scrambleWords, subtractWords, getTodaysJumbly, checkSolution } from './utils/wordUtils';
 import './App.css';
 
 const InformationPopup = () => {
@@ -33,8 +33,8 @@ const InformationPopup = () => {
 };
 
 // const words = getTodaysRandomWords();
-// const scrambled = scrambleWords(words);
-const scrambled = 'poeicedadfchnmacuusf';
+const scrambled = getTodaysJumbly();
+// const scrambled = 'poeicedadfchnmacuusf';
 
 function App() {
   const date = new Date().toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' });
