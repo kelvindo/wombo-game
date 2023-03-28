@@ -36,9 +36,9 @@ function App() {
     if (inputWord.length < 4) {
       setInputWord(inputWord + letter);
       const tile = document.querySelector(`.remaining-letters-tile:nth-child(${index + 1})`);
-      tile?.classList.add('highlighted');
+      tile?.classList.add('highlighted-green');
       setTimeout(() => {
-        tile?.classList.remove('highlighted');
+        tile?.classList.remove('highlighted-green');
       }, 250);
     }
   };
