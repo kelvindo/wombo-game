@@ -46,12 +46,20 @@ function App() {
   const handleHint = () => {
     const solutionChecks = checkSolution(scrambled, guessedWords);
   
-    const guessedWordItems = document.querySelectorAll('.guessed-word-item');
+    const guessedWordRows = document.querySelectorAll('.guessed-word-row');
   
-    for (let i = 0; i < guessedWordItems.length; i++) {
+    for (let i = 0; i < guessedWords.length; i++) {
       const [word, isValid] = solutionChecks[i];
-      guessedWordItems[i].classList.toggle('guessed-word-item--correct', isValid);
-      guessedWordItems[i].classList.toggle('guessed-word-item--incorrect', !isValid);
+      const guessedWordTiles = guessedWordRows[i].querySelectorAll('.guessed-word-tile');
+      for (let j = 0; j < guessedWordTiles.length; j++) {
+        guessedWordTiles[j].classList.toggle('guessed-word-tile--correct', isValid);
+        guessedWordTiles[j].classList.toggle('guessed-word-tile--incorrect', !isValid);
+
+        setTimeout(() => {
+          guessedWordTiles[j].classList.remove('guessed-word-tile--correct');
+          guessedWordTiles[j].classList.remove('guessed-word-tile--incorrect');
+        }, 3000);
+      }
     }
   };
 
