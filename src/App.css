@@ -155,6 +155,20 @@ li {
   color: red; /* light red */
 }
 
+.guessed-word-tile {
+  display: inline-block;
+  background-color: rgb(108, 108, 108);
+  font-size: 24px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  margin: 5px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  transition: background-color 500ms ease-in-out;
+}
+
 .information-button {
   position: fixed;
   top: 10px;

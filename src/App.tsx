@@ -117,13 +117,17 @@ function App() {
         </div>
       </form>
       {guessedWords.length === 5 && <h3>You Win!</h3>}
-      <ul>
-        {guessedWords.map((word, index) => (
-          <li key={index} className="guessed-word-item">
-            {word}
-          </li>
+      <div className="guessed-words-container">
+        {[0, 1, 2, 3, 4].map((row) => (
+          <div key={row} className="guessed-word-row">
+            {[0, 1, 2, 3].map((col) => (
+              <span key={col} className="guessed-word-tile">
+                {guessedWords[row] && guessedWords[row][col] ? guessedWords[row][col].toUpperCase() : ''}
+              </span>
+            ))}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
