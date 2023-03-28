@@ -66,20 +66,22 @@ function App() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    let lowercaseWord = inputWord.toLowerCase();
+
     // Check that the word has 4 letters, is English, and can be made from the tiles.
     if (
-      inputWord.length === 4 &&
-      isEnglishWord(inputWord) &&
-      canMakeWord(inputWord, remainingLetters)
+      lowercaseWord.length === 4 &&
+      isEnglishWord(lowercaseWord) &&
+      canMakeWord(lowercaseWord, remainingLetters)
     ) {
       // Remove the guessed word from the letters.
-      const newRemainingLetters = subtractWords(remainingLetters, inputWord);
+      const newRemainingLetters = subtractWords(remainingLetters, lowercaseWord);
       
       // Highlight the tiles of the guessed word.
       const guessedWordTiles = document.querySelectorAll('.remaining-letters-tile');
       for (let i = 0; i < remainingLetters.length; i++) {
         const letter = remainingLetters[i];
-        if (inputWord.includes(letter)) {
+        if (lowercaseWord.includes(letter)) {
           guessedWordTiles[i].classList.add('highlighted');
         }
         setTimeout(() => {
@@ -92,7 +94,7 @@ function App() {
         setStack([...stack, [remainingLetters, remainingLettersRest]])
         setRemainingLetters(newRemainingLetters + remainingLettersRest.slice(0, 4));
         setRemainingLettersRest(remainingLettersRest.slice(4))
-        setGuessedWords([...guessedWords, inputWord]);
+        setGuessedWords([...guessedWords, lowercaseWord]);
         setInputWord('');
       }, 500);
     }
