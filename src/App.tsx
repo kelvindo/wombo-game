@@ -58,7 +58,7 @@ function App() {
         setTimeout(() => {
           guessedWordTiles[j].classList.remove('guessed-word-tile--correct');
           guessedWordTiles[j].classList.remove('guessed-word-tile--incorrect');
-        }, 3000);
+        }, 1000);
       }
     }
   };
