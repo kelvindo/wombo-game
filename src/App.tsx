@@ -43,7 +43,7 @@ function App() {
     }
   };
 
-  const handleHint = () => {
+  const handleCheck = () => {
     const solutionChecks = checkSolution(scrambled, guessedWords);
   
     const guessedWordRows = document.querySelectorAll('.guessed-word-row');
@@ -120,7 +120,7 @@ function App() {
           <div className="button-container">
             <button type="submit">Guess</button>
             <button type="button" onClick={handleBackspace}>Back</button>
-            <button type="button" onClick={handleHint}>Hint</button>
+            <button type="button" onClick={handleCheck}>Check</button>
           </div>
         </div>
       </form>
@@ -171,7 +171,7 @@ const InformationPopup = () => {
               <li>Click the letters to guess 4 letter words</li>
               <li>Guessed letters will be replaced with new ones</li>
               <li>Use the "back" button to remove letters or words</li>
-              <li>Use the "hint" button to check which words are correct</li>
+              <li>Use the "check" button to check which words are correct</li>
               <li>Use all 20 letters to make 5 words and you win!</li>
             </ul>
             <button onClick={togglePopup}>Close</button>
