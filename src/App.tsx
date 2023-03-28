@@ -78,14 +78,14 @@ function App() {
       const newRemainingLetters = subtractWords(remainingLetters, lowercaseWord);
       
       // Highlight the tiles of the guessed word.
-      const guessedWordTiles = document.querySelectorAll('.remaining-letters-tile');
+      const remainingLettersTiles = document.querySelectorAll('.remaining-letters-tile');
       for (let i = 0; i < remainingLetters.length; i++) {
         const letter = remainingLetters[i];
         if (lowercaseWord.includes(letter)) {
-          guessedWordTiles[i].classList.add('highlighted');
+          remainingLettersTiles[i].classList.add('highlighted-green');
         }
         setTimeout(() => {
-          guessedWordTiles[i].classList.remove('highlighted');
+          remainingLettersTiles[i].classList.remove('highlighted-green');
         }, 500);
       }
       
@@ -95,6 +95,19 @@ function App() {
         setRemainingLetters(newRemainingLetters + remainingLettersRest.slice(0, 4));
         setRemainingLettersRest(remainingLettersRest.slice(4))
         setGuessedWords([...guessedWords, lowercaseWord]);
+        setInputWord('');
+      }, 500);
+
+    // If the checks fail, highlight the tiles red and clear the input.
+    } else {
+      const remainingLettersTiles = document.querySelectorAll('.remaining-letters-tile');
+      for (let i = 0; i < remainingLetters.length; i++) {
+        remainingLettersTiles[i].classList.add('highlighted-red');
+        setTimeout(() => {
+          remainingLettersTiles[i].classList.remove('highlighted-red');
+        }, 500);
+      }
+      setTimeout(() => {
         setInputWord('');
       }, 500);
     }

@@ -119,19 +119,38 @@ li {
   margin-bottom: 0.5rem;
 }
 
-.highlighted {
+.highlighted-green {
   background-color: green;
-  animation-name: highlight;
+  animation-name: highlight-green;
   animation-duration: 0.5s;
   animation-iteration-count: 1;
 }
 
-@keyframes highlight {
+@keyframes highlight-green {
   0% {
     background-color: inherit;
   }
   50% {
     background-color: rgba(0, 255, 0, 0.5);
+  }
+  100% {
+    background-color: inherit;
+  }
+}
+
+.highlighted-red {
+  background-color: red;
+  animation-name: highlight-red;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes highlight-red {
+  0% {
+    background-color: inherit;
+  }
+  50% {
+    background-color: rgb(255, 0, 0);
   }
   100% {
     background-color: inherit;
