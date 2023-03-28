@@ -222,3 +222,58 @@ li {
 .information-popup button {
   margin-top: 10px;
 }
+
+.pixel-animation {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+@keyframes pixel-bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-40px) rotate(20deg); }
+  100% { transform: translateY(0); }
+}
+
+.pixel {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff69b4;
+  animation: pixel-bounce 0.6s ease-in-out infinite;
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #fff;
+  top: 15%;
+  left: 30%;
+}
+
+.pupil {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #000;
+  top: 35%;
+  left: 45%;
+}
+
+.mouth {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #000;
+  top: 60%;
+  left: 50%;
+  transform: rotate(45deg);
+  border-top: none;
+  border-left: none;
+}

@@ -116,7 +116,20 @@ function App() {
           </div>
         </div>
       </form>
-      {guessedWords.length === 5 && <h3>You Win!</h3>}
+      {guessedWords.length === 5 && (
+        <div>
+          <h3>You Win!</h3>
+          <div className="pixel-animation">
+            <div className="pixel">
+              <div className="eye"></div>
+              <div className="eye" style={{ left: '55%' }}></div>
+              <div className="pupil"></div>
+              <div className="pupil" style={{ left: '55%' }}></div>
+              <div className="mouth"></div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="guessed-words-container">
         {[0, 1, 2, 3, 4].map((row) => (
           <div key={row} className="guessed-word-row">
